@@ -3,142 +3,384 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Anna's_Portfolio</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Anna's Portfolio</title>
+    <style>
+        /* Base styles for both light and dark mode */
+        :root {
+            --background-color: #2c3e50; /* Dark blue background instead of white */
+            --text-color: #ecf0f1; /* Lighter text for better contrast */
+            --accent-color: #4a86e8;
+            --section-border: #34495e; /* Darker border for sections */
+            --table-header-bg: #34495e;
+            --table-border: #3d566e;
+            --hover-color: #3476d9;
+            --table-row-alt: rgba(52, 73, 94, 0.5); /* Slightly lighter than background */
+        }
+
+        /* Dark mode styles - even darker */
+        .dark-mode {
+            --background-color: #1a1a2e; /* Very dark blue, almost black */
+            --text-color: #e0e0e0;
+            --accent-color: #7aa9ff;
+            --section-border: #16213e;
+            --table-header-bg: #16213e;
+            --table-border: #0f3460;
+            --hover-color: #90b8ff;
+            --table-row-alt: rgba(22, 33, 62, 0.7);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        h1, h2 {
+            color: var(--accent-color);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        hr {
+            border: none;
+            height: 1px;
+            background-color: var(--section-border);
+            margin: 30px 0;
+        }
+
+        ul {
+            list-style-type: none;
+            padding-left: 10px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        strong {
+            color: var(--accent-color);
+        }
+
+        img.profile-pic {
+            border-radius: 50%;
+            float: left;
+            margin-right: 15px;
+            border: 3px solid var(--accent-color);
+            transition: transform 0.3s;
+        }
+
+        img.profile-pic:hover {
+            transform: scale(1.05);
+        }
+
+        .clear {
+            clear: both;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid var(--table-border);
+        }
+
+        th {
+            background-color: var(--table-header-bg);
+            color: var(--accent-color);
+        }
+
+        tr:nth-child(even) {
+            background-color: var(--table-row-alt);
+        }
+
+        a {
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        a:hover {
+            color: var(--hover-color);
+            text-decoration: underline;
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Toggle switch for dark mode */
+        .mode-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 999;
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #34495e;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: var(--accent-color);
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+
+        .slider:after {
+            content: "🌓";
+            color: #fff;
+            display: block;
+            position: absolute;
+            transform: translate(-50%,-50%);
+            top: 50%;
+            left: 70%;
+            font-size: 10px;
+        }
+
+        input:checked + .slider:after {
+            content: "🌑";
+            left: 30%;
+        }
+
+        /* Responsive adjustments */
+        @media screen and (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            iframe, img.profile-pic {
+                width: 100%;
+                height: auto;
+                float: none;
+                margin: 10px 0;
+            }
+            
+            table {
+                font-size: 14px;
+            }
+            
+            th, td {
+                padding: 8px;
+            }
+        }
+    </style>
 </head>
 <body>
-   
-    <h1>Anna's Portfolio😎</h1>
-    <p>Hei! Welcome to my portfolio</p>
-    <p>I'm a second-year Computer Science student with an interest in Embedded Systems and Robotics Engineering. I like  trying out complex problems and as i enrich my knowledge on  Arduino and microcontrollers. There's something satisfying about writing code and seeing it control hardware in the real world.</p>
-    <p>"If it works don'Portfolio touch it."(If it doesnot make sense definetely touch it.)😜</p>
-    <hr> <!--Section Separator-->
-    
-    <!-- Personal Details Section-->
-    <h2>Personal Details</h2>
-    <ul>
-        <li><strong>Full Name:</strong>       Anna Akumu</li>
-        <li><strong>Student ID:</strong>      S23B23\094 B24782</li>
-        <li><strong>Course:</strong>          Bachelor of Science in Computer Science</li>
-        <li><strong>Year:</strong>            Year 2</li>
-        <li><strong>Hobbies:</strong> Cleaning, Chess, Eating, Coding, Watching cartoons and movies and Reading. Art(Cant draw but can scribble.😂😂)</li>
-    </ul>
-    
-    <hr>
-    
-    <!-- Profile Picture Section-->
-    <h2>Profile Picture</h2>
-    <img src="profile_picture.jpeg" 
-     alt="Anna's Profile Picture" 
-     width="200" 
-     height="250" 
-     style="border-radius: 50%; float: left; margin-right: 15px;">
-    
-    <!-- Add a clearing div to prevent floating issues -->
-    <div style="clear: both;"></div>
-    <hr>
-    
-    <!-- Embedded Hobby Video Section-->
-    <h2>Chess</h2>
-    <iframe width="640" 
-        height="360" 
-        src="https://www.youtube.com/embed/cm7G1OHxovU" 
-        frameborder="0" 
-        allowfullscreen>
-    </iframe>
+    <div class="container">
+        <!-- Dark Mode Toggle -->
+        <div class="mode-toggle">
+            <label class="switch">
+                <input type="checkbox" id="darkModeToggle">
+                <span class="slider"></span>
+            </label>
+        </div>
+        
+        <h1>Anna's Portfolio😎</h1>
+        <p>Hei! Welcome to my portfolio</p>
+        <p>I'm a second-year Computer Science student with an interest in Embedded Systems and Robotics Engineering. I like trying out complex problems and as i enrich my knowledge on Arduino and microcontrollers. There's something satisfying about writing code and seeing it control hardware in the real world.</p>
+        <p>"If it works don't touch it."(If it doesnot make sense definetely touch it.)😜</p>
+        
+        <hr> <!--Section Separator-->
+        
+        <!-- Personal Details Section-->
+        <h2>Personal Details</h2>
+        <ul>
+            <li><strong>Full Name:</strong> Anna Akumu</li>
+            <li><strong>Student ID:</strong> S23B23\094 B24782</li>
+            <li><strong>Course:</strong> Bachelor of Science in Computer Science</li>
+            <li><strong>Year:</strong> Year 2</li>
+            <li><strong>Hobbies:</strong> Cleaning, Chess, Eating, Coding, Watching cartoons and movies, Reading and Art(Cant draw but can scribble.😂😂)</li>
+        </ul>
+        
+        <hr>
+        
+        <!-- Profile Picture Section-->
+        <h2>Profile Picture</h2>
+        <img src="profile_picture.jpeg" 
+             alt="Anna's Profile Picture" 
+             width="200" 
+             height="250" 
+             class="profile-pic">
+        
+        <!-- Add a clearing div to prevent floating issues -->
+        <div class="clear"></div>
+        <hr>
+        
+        <!-- Embedded Hobby Video Section-->
+        <h2>Chess</h2>
+        <div class="video-container">
+            <iframe src="https://www.youtube.com/embed/cm7G1OHxovU" 
+                frameborder="0" 
+                allowfullscreen>
+            </iframe>
+        </div>
+        
+        <hr>
+        
+        <!-- Academic Results Table Section-->
+        <h2>Year 1 Semester 1 Results</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Course Code</th>
+                    <th>Course Title</th>
+                    <th>Grade</th>
+                    <th>Credit Units</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>CSC1101</td>
+                    <td>Structured Programming</td>
+                    <td>B+</td>
+                    <td>5</td>
+                </tr>
+                <tr>
+                    <td>MTH1102</td>
+                    <td>Discrete Mathematics</td>
+                    <td>A</td>
+                    <td>4</td>
+                </tr>
+                <tr>
+                    <td>ICT1102</td>
+                    <td>Essentials of Hardware and Software Concepts</td>
+                    <td>A</td>
+                    <td>4</td>
+                </tr>
+                <tr>
+                    <td>ICT1103</td>
+                    <td>Fundamentals of Computing </td>
+                    <td>A</td>
+                    <td>4</td>
+                </tr>
+                <tr>
+                    <td>TBS1103</td>
+                    <td>Understanding the Old Testament</td>
+                    <td>B+</td>
+                    <td>3</td> 
+                </tr>
+                <tr>
+                    <td>LNG1101</td>
+                    <td>Writing and Study Skills</td>
+                    <td>A</td>
+                    <td>3</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <hr>
+        
+        <!-- Links and Navigation Section -->
+        <h2>Useful Links</h2>
+        <p>
+            <a href="https://github.com/a-kum2580" target="_blank">My GitHub Profile</a><br>
+            <a href="https://moodle.ucu.ac.ug/" target="_blank">Moodle UCU login</a>
+        </p>
+        
+        <hr>
+        
+        <!-- Contact Information Section  -->
+        <h2>Contact Information</h2>
+        <p>
+            Email: <a href="mailto:akumann48@gmail.com">akumann48@gmail.com</a><br>
+            GitHub: <a href="https://github.com/a-kum2580" target="_blank">github.com/a-kum2580</a>
+        </p>
+        
+        <hr>
+        
+        <!-- Career Goals Section -->
+        <h2>Career Goals</h2>
+        <p>My primary career goal is to become an Embedded Systems and Robotics Engineer, specializing in the integration of AI and IoT to develop smart and autonomous systems.</p> 
+        <p>I am particularly interested in working with emerging technologies like artificial intelligence, blockchain, and edge computing to create innovative solutions in automation and smart devices.</p>
+        <p>In the short term, I aim to secure an internship at a leading tech company to gain hands-on experience in hardware-software integration, microcontroller programming, and real-time systems. Long-term, I aim to build a career in embedded systems, robotics, electronics, and AI-driven automation, focusing on hands-on projects and continuous learning.</p>
+        <p>I'm passionate about contributing to innovative, meaningful technology.</p>
+    </div>
 
-    <!-- <video width="640" height="360" controls>
-        <source src="chess_video.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-    </video> -->
-    
-    
-    <!-- YouTube Alternative 
-    <iframe width="640" 
-            height="360" 
-            src="https://youtu.be/cm7G1OHxovU?si=yv7ml5WOC3KVcpgy" 
-            frameborder="0" 
-            allowfullscreen>
-    </iframe> -->
-    
-    <hr>
-    
-    <!-- Academic Results Table Section-->
-    <h2>Year 1 Semester 1 Results</h2>
-    <table border="1">
-        <thead>
-            <tr>
-                <th>Course Code</th>
-                <th>Course Title</th>
-                <th>Grade</th>
-                <th>Credit Units</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>CSC1101</td>
-                <td>Structured Programming</td>
-                <td>B+</td>
-                <td>5</td>
-            </tr>
-            <tr>
-                <td>MTH1102</td>
-                <td>Discrete Mathematics</td>
-                <td>A</td>
-                <td>4</td>
-            </tr>
-            <tr>
-                <td>ICT1102</td>
-                <td>Essentials of Hardware and Software Concepts</td>
-                <td>A</td>
-                <td>4</td>
-            </tr>
-            <tr>
-                <td>ICT1103</td>
-                <td>Fundamentals of Computing </td>
-                <td>A</td>
-                <td>4</td>
-            </tr>
-            <tr>
-                <td>TBS1103</td>
-                <td>Understanding the Old Testament</td>
-                <td>B+</td>
-                <td>3</td> 
-            </tr>
-            <tr>
-                <td>LNG1101</td>
-                <td>Writing and Study Skills</td>
-                <td>A</td>
-                <td>3</td>
-            </tr>
-        </tbody>
-    </table>
-    
-    <hr>
-    
-    <!-- Links and Navigation Section -->
-    <h2>Useful Links</h2>
-    <p>
-        <a href="https://github.com/a-kum2580" target="_blank">My GitHub Profile</a><br>
-        <a href="https://moodle.ucu.ac.ug/" target="_blank">Moodle UCU login</a>
-    </p>
-    
-    <hr>
-    
-    <!-- Contact Information Section  -->
-    <h2>Contact Information</h2>
-    <p>
-        Email: <a href="mailto:akumann48@gmail.com">akumann48@gmail.com</a><br>
-        GitHub: <a href="https://github.com/a-kum2580" target="_blank">github.com/a-kum2580</a>
-    </p>
-    
-    <hr>
-    
-    <!-- Career Goals Section -->
-    <h2>Career Goals</h2>
-    <p>My primary career goal is to become an Embedded Systems and Robotics Engineer, specializing in the integration of AI and IoT to develop smart and autonomous systems.</p> 
-    <p>I am particularly interested in working with emerging technologies like artificial intelligence, blockchain, and edge computing to create innovative solutions in automation and smart devices.</p>
-    <p>In the short term, I aim to secure an internship at a leading tech company to gain hands-on experience in hardware-software integration, microcontroller programming, and real-time systems. Long-term, I aim to build a career in embedded systems, robotics, electronics, and AI-driven automation, focusing on hands-on projects and continuous learning.</p>
-    <p>I'm passionate about contributing to innovative, meaningful technology.</p>
+    <script>
+        // Dark mode toggle functionality
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        
+        // Check for saved user preference
+        if (localStorage.getItem('darkMode') === 'enabled') {
+            document.body.classList.add('dark-mode');
+            darkModeToggle.checked = true;
+        }
+        
+        // Listen for toggle changes
+        darkModeToggle.addEventListener('change', function() {
+            if (this.checked) {
+                document.body.classList.add('dark-mode');
+                localStorage.setItem('darkMode', 'enabled');
+            } else {
+                document.body.classList.remove('dark-mode');
+                localStorage.setItem('darkMode', 'disabled');
+            }
+        });
+    </script>
 </body>
 </html>
